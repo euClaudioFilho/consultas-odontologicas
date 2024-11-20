@@ -4,6 +4,14 @@ import LoginView from "./views/LoginView";
 import RegistroView from "./views/RegistroView";
 import AgendamentoView from "./views/AgendamentoView";
 import MinhasConsultasView from "./views/MinhasConsultasView";
+import HomeView from "./views/HomeView";
+
+const usuarioMock = {
+  nome: 'Renatinho Lindo, te amo',
+  tipo: 'Paciente', // 'Administrador' 'Paciente'
+};
+
+
 
 function App() {
   return (
@@ -12,6 +20,7 @@ function App() {
         <Route path="/" element={<LoginView />} />
         <Route path="/register" element={<RegistroView />} />
         <Route path="/login" element={<LoginView />} />
+        <Route path="/home" element={<HomeView usuario={usuarioMock} />} />
         <Route path="/agendamento" element={<AgendamentoView />} />
         <Route path="/minhasConsultas" element={<MinhasConsultasView />} />
       </Routes>
