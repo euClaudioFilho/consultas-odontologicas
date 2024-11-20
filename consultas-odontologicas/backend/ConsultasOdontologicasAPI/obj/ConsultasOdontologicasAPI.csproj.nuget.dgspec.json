@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Claudio Filho\\Documents\\Estudos\\Programação\\Faculdade\\4 PERÍODO\\P. Full Stack\\Trabalho 1 - Camillo\\trabalho-camillo\\consultas-odontologicas\\backend\\ConsultasOdontologicasAPI\\ConsultasOdontologicasAPI.csproj": {}
+    "F:\\Vianna\\PFS\\Trabalho\\consultas-odontologicas\\consultas-odontologicas\\backend\\ConsultasOdontologicasAPI\\ConsultasOdontologicasAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Claudio Filho\\Documents\\Estudos\\Programação\\Faculdade\\4 PERÍODO\\P. Full Stack\\Trabalho 1 - Camillo\\trabalho-camillo\\consultas-odontologicas\\backend\\ConsultasOdontologicasAPI\\ConsultasOdontologicasAPI.csproj": {
+    "F:\\Vianna\\PFS\\Trabalho\\consultas-odontologicas\\consultas-odontologicas\\backend\\ConsultasOdontologicasAPI\\ConsultasOdontologicasAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Claudio Filho\\Documents\\Estudos\\Programação\\Faculdade\\4 PERÍODO\\P. Full Stack\\Trabalho 1 - Camillo\\trabalho-camillo\\consultas-odontologicas\\backend\\ConsultasOdontologicasAPI\\ConsultasOdontologicasAPI.csproj",
+        "projectUniqueName": "F:\\Vianna\\PFS\\Trabalho\\consultas-odontologicas\\consultas-odontologicas\\backend\\ConsultasOdontologicasAPI\\ConsultasOdontologicasAPI.csproj",
         "projectName": "ConsultasOdontologicasAPI",
-        "projectPath": "C:\\Users\\Claudio Filho\\Documents\\Estudos\\Programação\\Faculdade\\4 PERÍODO\\P. Full Stack\\Trabalho 1 - Camillo\\trabalho-camillo\\consultas-odontologicas\\backend\\ConsultasOdontologicasAPI\\ConsultasOdontologicasAPI.csproj",
-        "packagesPath": "C:\\Users\\Claudio Filho\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Claudio Filho\\Documents\\Estudos\\Programação\\Faculdade\\4 PERÍODO\\P. Full Stack\\Trabalho 1 - Camillo\\trabalho-camillo\\consultas-odontologicas\\backend\\ConsultasOdontologicasAPI\\obj\\",
+        "projectPath": "F:\\Vianna\\PFS\\Trabalho\\consultas-odontologicas\\consultas-odontologicas\\backend\\ConsultasOdontologicasAPI\\ConsultasOdontologicasAPI.csproj",
+        "packagesPath": "C:\\Users\\Thiago\\.nuget\\packages\\",
+        "outputPath": "F:\\Vianna\\PFS\\Trabalho\\consultas-odontologicas\\consultas-odontologicas\\backend\\ConsultasOdontologicasAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Claudio Filho\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Thiago\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -74,6 +74,10 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.6.2, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[8.2.1, )"
             }
           },
           "imports": [
@@ -95,7 +99,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

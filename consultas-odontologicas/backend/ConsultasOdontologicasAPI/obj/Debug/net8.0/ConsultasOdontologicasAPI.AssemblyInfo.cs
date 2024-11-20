@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ConsultasOdontologicasAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d015bd56fadc2182cf5ebefc8d19b3f8800d6ed0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+be0738af0f966c2d1c8b7686664e8d1ac5f24a72")]
 [assembly: System.Reflection.AssemblyProductAttribute("ConsultasOdontologicasAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ConsultasOdontologicasAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
