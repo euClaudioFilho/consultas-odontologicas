@@ -6,6 +6,7 @@ import AgendamentoView from "./views/AgendamentoView";
 import MinhasConsultasView from "./views/MinhasConsultasView";
 import HomeView from "./views/HomeView";
 import GerenciamentoPacientesView from "./views/GerenciamentoPacientesView";
+import GerenciamentoDentistasView from "./views/GerenciamentoDentsistasView";
 
 const usuarioMock = {
   nome: 'Renatinho Lindo, te amo',
@@ -25,6 +26,7 @@ function App() {
         <Route path="/agendamento" element={<AgendamentoView />} />
         <Route path="/minhasConsultas" element={<MinhasConsultasView />} />
         <Route path="/gerenciarPacientes" element={<GerenciamentoPacientesView />}/>
+        <Route path="/gerenciarDentistas" element={<GerenciamentoDentistasView />}/>
       </Routes>
     </Router>
   );
