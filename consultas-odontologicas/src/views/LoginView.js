@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const LoginView = () => {
   return (
@@ -12,7 +13,7 @@ const LoginView = () => {
           <Input type="password" placeholder="Senha" />
           <Button>Entrar</Button>
           <RegisterLink>
-            Não tem uma conta? <a href="/register">Registre-se</a>
+            Não tem uma conta? <Link to="/register">Registre-se</Link>
           </RegisterLink>
         </Form>
       </LoginCard>
