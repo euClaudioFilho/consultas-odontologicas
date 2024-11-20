@@ -26,11 +26,11 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f0f8ff; /* Azul claro para o fundo */
+  background-color: #f0f8ff; 
 `;
 
 const LoginCard = styled.div`
-  background-color: #ffffff; /* Branco para o card */
+  background-color: #ffffff;
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -41,16 +41,16 @@ const LoginCard = styled.div`
 
 const Title = styled.h1`
   font-size: 28px;
-  color: #004aad; /* Azul mais escuro para o título */
+  color: #004aad; 
   margin-bottom: 10px;
-  font-family: 'Roboto', sans-serif; /* Fonte Roboto */
+  font-family: 'Roboto', sans-serif; 
 `;
 
 const Subtitle = styled.p`
   font-size: 16px;
-  color: #6b7c93; /* Cinza para o subtítulo */
+  color: #6b7c93; 
   margin-bottom: 20px;
-  font-family: 'Montserrat', sans-serif; /* Fonte Montserrat */
+  font-family: 'Montserrat', sans-serif; 
 `;
 
 const Form = styled.form`
@@ -61,28 +61,28 @@ const Form = styled.form`
 
 const Input = styled.input`
   padding: 10px;
-  border: 1px solid #d1d9e6; /* Cinza claro */
+  border: 1px solid #d1d9e6; 
   border-radius: 5px;
   font-size: 16px;
   background-color: #f9f9f9;
-  font-family: 'Montserrat', sans-serif; /* Fonte Montserrat */
+  font-family: 'Montserrat', sans-serif; 
   &:focus {
-    border-color: #004aad; /* Azul ao focar */
+    border-color: #004aad;
     outline: none;
   }
 `;
 
 const Button = styled.button`
-  background-color: #004aad; /* Azul para o botão */
+  background-color: #004aad; 
   color: white;
   font-size: 16px;
   padding: 10px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-family: 'Poppins', sans-serif; /* Fonte Poppins */
+  font-family: 'Poppins', sans-serif; 
   &:hover {
-    background-color: #003080; /* Azul mais escuro no hover */
+    background-color: #003080;
   }
 `;
 
@@ -90,11 +90,11 @@ const RegisterLink = styled.p`
   font-size: 14px;
   color: #6b7c93;
   margin-top: 10px;
-  font-family: 'Montserrat', sans-serif; /* Fonte Montserrat */
+  font-family: 'Montserrat', sans-serif;
   a {
-    color: #004aad; /* Azul para o link */
+    color: #004aad;
     text-decoration: none;
-    font-family: 'Poppins', sans-serif; /* Fonte Poppins */
+    font-family: 'Poppins', sans-serif; 
     &:hover {
       text-decoration: underline;
     }

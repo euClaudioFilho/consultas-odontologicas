@@ -2,86 +2,105 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-const FormContainer = styled.div`
+const RegisterView = () => {
+  return (
+    <Container>
+      <RegisterCard>
+        <Title>Registrar-se</Title>
+        <Subtitle>Crie sua conta para agendar consultas</Subtitle>
+        <Form>
+          <Input type="text" placeholder="Nome" />
+          <Input type="email" placeholder="Email" />
+          <Input type="password" placeholder="Senha" />
+          <Input type="password" placeholder="Confirme a Senha" />
+          <Button>Registrar</Button>
+          <LoginLink>
+            Já tem uma conta? <Link to="/login">Faça login</Link>
+          </LoginLink>
+        </Form>
+      </RegisterCard>
+    </Container>
+  );
+};
+
+const Container = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   height: 100vh;
-  background: linear-gradient(135deg, #f0f4f8, #d9e4f1);
+  background-color: #f0f8ff; 
 `;
 
-const Form = styled.div`
-  display: flex;
-  flex-direction: column;
-  background: #ffffff;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+const RegisterCard = styled.div`
+  background-color: #ffffff; 
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
   width: 100%;
   max-width: 400px;
 `;
 
-const Title = styled.h2`
-  color: #333333;
-  text-align: center;
-  margin-bottom: 1.5rem;
-  font-family: 'Roboto', sans-serif; /* Fonte específica para o título */
+const Title = styled.h1`
+  font-size: 28px;
+  color: #004aad; 
+  margin-bottom: 10px;
+  font-family: 'Roboto', sans-serif; 
+`;
+
+const Subtitle = styled.p`
+  font-size: 16px;
+  color: #6b7c93; 
+  margin-bottom: 20px;
+  font-family: 'Montserrat', sans-serif; 
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 `;
 
 const Input = styled.input`
-  margin-bottom: 1rem;
-  padding: 0.75rem;
-  border: 1px solid #ddd;
+  padding: 10px;
+  border: 1px solid #d1d9e6; 
   border-radius: 5px;
-  font-size: 1rem;
-  font-family: 'Montserrat', sans-serif; /* Fonte do corpo */
-`;
-
-const Button = styled.button`
-  background-color: #007bff;
-  color: white;
-  font-size: 1rem;
-  padding: 0.75rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-family: 'Poppins', sans-serif; /* Fonte para navegação e botões */
-  &:hover {
-    background-color: #0056b3;
+  font-size: 16px;
+  background-color: #f9f9f9;
+  font-family: 'Montserrat', sans-serif; 
+  &:focus {
+    border-color: #004aad; 
+    outline: none;
   }
 `;
 
-const BackToLogin = styled.p`
-  text-align: center;
-  margin-top: 1rem;
-  font-family: 'Montserrat', sans-serif; /* Fonte Montserrat */
+const Button = styled.button`
+  background-color: #004aad; 
+  color: white;
+  font-size: 16px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif; 
+  &:hover {
+    background-color: #003080; 
+  }
+`;
+
+const LoginLink = styled.p`
+  font-size: 14px;
+  color: #6b7c93;
+  margin-top: 10px;
+  font-family: 'Montserrat', sans-serif; 
   a {
-    color: #007bff;
+    color: #004aad; 
     text-decoration: none;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif; 
     &:hover {
       text-decoration: underline;
     }
   }
 `;
-
-const RegisterView = () => {
-  return (
-    <FormContainer>
-      <Form>
-        <Title>Registro de Pacientes</Title>
-        <Input type="text" placeholder="Nome" />
-        <Input type="email" placeholder="Email" />
-        <Input type="password" placeholder="Senha" />
-        <Input type="password" placeholder="Confirme a Senha" />
-        <Button>Registrar</Button>
-        <BackToLogin>
-          Já tem uma conta? <Link to="/login">Login</Link>
-        </BackToLogin>
-      </Form>
-    </FormContainer>
-  );
-};
 
 export default RegisterView;
