@@ -7,9 +7,10 @@ import MinhasConsultasView from "./views/MinhasConsultasView";
 import HomeView from "./views/HomeView";
 import GerenciamentoPacientesView from "./views/GerenciamentoPacientesView";
 import GerenciamentoDentistasView from "./views/GerenciamentoDentsistasView";
+import GerenciamentoConsultasView from "./views/GerenciamentoConsultasView";
 
 const usuarioMock = {
-  nome: 'Renatinho Lindo, te amo',
+  nome: 'Claudio',
   tipo: 'Paciente', // 'Administrador' 'Paciente'
 };
 
@@ -27,6 +28,7 @@ function App() {
         <Route path="/minhasConsultas" element={<MinhasConsultasView />} />
         <Route path="/gerenciarPacientes" element={<GerenciamentoPacientesView />}/>
         <Route path="/gerenciarDentistas" element={<GerenciamentoDentistasView />}/>
+        <Route path="/gerenciarConsultas" element={<GerenciamentoConsultasView />}/>
       </Routes>
     </Router>
   );
