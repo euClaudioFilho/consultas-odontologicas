@@ -14,7 +14,6 @@ namespace ConsultasOdontologicasAPI.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // Configurações adicionais, se necessário
             modelBuilder.Entity<Usuario>().Property(u => u.TipoUsuario).HasMaxLength(50);
             modelBuilder.Entity<Consulta>().Property(c => c.Status).HasMaxLength(20);
         }

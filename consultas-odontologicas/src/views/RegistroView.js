@@ -1,19 +1,63 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { registerUser } from "../services/authService";
 
 const RegisterView = () => {
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [confirmSenha, setConfirmSenha] = useState("");
+  const [erro, setErro] = useState("");
+  const navigate = useNavigate();
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    if (senha !== confirmSenha) {
+      setErro("As senhas não coincidem.");
+      return;
+    }
+
+    try {
+      await registerUser({ nome, email, senha, tipoUsuario: "Paciente" });
+      navigate("/login"); 
+    } catch (error) {
+      setErro(error.message);
+    }
+  };
+
   return (
     <Container>
       <RegisterCard>
         <Title>Registrar-se</Title>
         <Subtitle>Crie sua conta para agendar consultas</Subtitle>
-        <Form>
-          <Input type="text" placeholder="Nome" />
-          <Input type="email" placeholder="Email" />
-          <Input type="password" placeholder="Senha" />
-          <Input type="password" placeholder="Confirme a Senha" />
-          <Button>Registrar</Button>
+        {erro && <Error>{erro}</Error>}
+        <Form onSubmit={handleRegister}>
+          <Input
+            type="text"
+            placeholder="Nome"
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+          />
+          <Input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Input
+            type="password"
+            placeholder="Senha"
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
+          />
+          <Input
+            type="password"
+            placeholder="Confirme a Senha"
+            value={confirmSenha}
+            onChange={(e) => setConfirmSenha(e.target.value)}
+          />
+          <Button type="submit">Registrar</Button>
           <LoginLink>
             Já tem uma conta? <Link to="/login">Faça login</Link>
           </LoginLink>
@@ -101,6 +145,12 @@ const LoginLink = styled.p`
       text-decoration: underline;
     }
   }
+`;
+
+const Error = styled.p`
+  color: red;
+  font-size: 14px;
+  margin-bottom: 10px;
 `;
 
 export default RegisterView;

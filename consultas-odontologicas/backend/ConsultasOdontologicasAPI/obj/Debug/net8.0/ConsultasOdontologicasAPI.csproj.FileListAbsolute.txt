@@ -325,3 +325,8 @@ F:\Vianna\PFS\Trabalho\consultas-odontologicas\consultas-odontologicas\backend\C
 F:\Vianna\PFS\Trabalho\consultas-odontologicas\consultas-odontologicas\backend\ConsultasOdontologicasAPI\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
 F:\Vianna\PFS\Trabalho\consultas-odontologicas\consultas-odontologicas\backend\ConsultasOdontologicasAPI\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 F:\Vianna\PFS\Trabalho\consultas-odontologicas\consultas-odontologicas\backend\ConsultasOdontologicasAPI\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Claudio Filho\Documents\Estudos\Programação\Faculdade\4 PERÍODO\P. Full Stack\Trabalho 1 - Camillo\trabalho-camillo\consultas-odontologicas\backend\ConsultasOdontologicasAPI\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Claudio Filho\Documents\Estudos\Programação\Faculdade\4 PERÍODO\P. Full Stack\Trabalho 1 - Camillo\trabalho-camillo\consultas-odontologicas\backend\ConsultasOdontologicasAPI\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Claudio Filho\Documents\Estudos\Programação\Faculdade\4 PERÍODO\P. Full Stack\Trabalho 1 - Camillo\trabalho-camillo\consultas-odontologicas\backend\ConsultasOdontologicasAPI\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Claudio Filho\Documents\Estudos\Programação\Faculdade\4 PERÍODO\P. Full Stack\Trabalho 1 - Camillo\trabalho-camillo\consultas-odontologicas\backend\ConsultasOdontologicasAPI\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Claudio Filho\Documents\Estudos\Programação\Faculdade\4 PERÍODO\P. Full Stack\Trabalho 1 - Camillo\trabalho-camillo\consultas-odontologicas\backend\ConsultasOdontologicasAPI\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
