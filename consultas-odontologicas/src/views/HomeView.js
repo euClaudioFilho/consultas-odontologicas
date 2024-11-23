@@ -1,20 +1,44 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const HomeView = () => {
+  const [tipoUsuario, setTipoUsuario] = useState(null);
   const navigate = useNavigate();
-  const [tipoUsuario, setTipoUsuario] = useState("");
 
   useEffect(() => {
-    
-    const tipo = localStorage.getItem("tipoUsuario");
-    if (tipo) {
-      setTipoUsuario(tipo); 
-    } else {
-      navigate("/login");
-    }
+    const fetchUserType = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const tipoUsuario = localStorage.getItem("tipoUsuario");
+
+        if (!token || !tipoUsuario) {
+          navigate("/login");
+          return;
+        }
+
+        // Define o tipo de usuário diretamente
+        setTipoUsuario(tipoUsuario);
+      } catch (error) {
+        console.error("Erro ao obter o tipo de usuário:", error);
+        navigate("/login");
+      }
+    };
+
+    fetchUserType();
   }, [navigate]);
+
+  if (!tipoUsuario) {
+    return (
+      <Container>
+        <Card>
+          <Title>Bem-vindo!</Title>
+          <Subtitle>Carregando...</Subtitle>
+        </Card>
+      </Container>
+    );
+  }
 
   return (
     <Container>
@@ -23,82 +47,18 @@ const HomeView = () => {
         {tipoUsuario === "Paciente" ? (
           <>
             <Subtitle>Suas próximas consultas:</Subtitle>
-            <List>
-              <ConsultaCard>
-                <Info>
-                  <strong>Data:</strong> 2024-12-01 às 14:00
-                </Info>
-                <Info>
-                  <strong>Dentista:</strong> Dr. João
-                </Info>
-              </ConsultaCard>
-              <ConsultaCard>
-                <Info>
-                  <strong>Data:</strong> 2024-12-05 às 09:00
-                </Info>
-                <Info>
-                  <strong>Dentista:</strong> Dra. Maria
-                </Info>
-              </ConsultaCard>
-            </List>
-            <Button onClick={() => navigate("/minhasConsultas")}>
-              Ver Minhas Consultas
-            </Button>
-            <Button onClick={() => navigate("/agendamento")}>
-              Agendar Nova Consulta
-            </Button>
+            {/* Conteúdo para Pacientes */}
           </>
         ) : tipoUsuario === "Administrador" ? (
           <>
             <Subtitle>Painel Administrativo</Subtitle>
-            <List>
-              <AdminCard>
-                <Info>
-                  <strong>Consultas Hoje:</strong> 12
-                </Info>
-              </AdminCard>
-              <AdminCard>
-                <Info>
-                  <strong>Pacientes Cadastrados:</strong> 150
-                </Info>
-              </AdminCard>
-              <AdminCard>
-                <Info>
-                  <strong>Dentistas Cadastrados:</strong> 5
-                </Info>
-              </AdminCard>
-            </List>
-            <Button onClick={() => navigate("/gerenciarConsultas")}>
-              Gerenciar Consultas
-            </Button>
-            <Button onClick={() => navigate("/gerenciarPacientes")}>
-              Gerenciar Pacientes
-            </Button>
-            <Button onClick={() => navigate("/gerenciarDentistas")}>
-              Gerenciar Dentistas
-            </Button>
-          </>
-        ) : tipoUsuario === "Dentista" ? (
-          <>
-            <Subtitle>Agenda do Dentista</Subtitle>
-            <List>
-              <AdminCard>
-                <Info>
-                  <strong>Próxima Consulta:</strong> 2024-12-01 às 14:00
-                </Info>
-              </AdminCard>
-              <AdminCard>
-                <Info>
-                  <strong>Total de Consultas Hoje:</strong> 10
-                </Info>
-              </AdminCard>
-            </List>
-            <Button onClick={() => navigate("/minhasConsultas")}>
-              Ver Agenda Completa
-            </Button>
+            {/* Conteúdo para Administradores */}
           </>
         ) : (
-          <Subtitle>Carregando...</Subtitle>
+          <>
+            <Subtitle>Agenda do Dentista</Subtitle>
+            {/* Conteúdo para Dentistas */}
+          </>
         )}
       </Card>
     </Container>

@@ -58,19 +58,21 @@ namespace ConsultasOdontologicasAPI.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginDTO loginDto)
-        {
-            var user = await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == loginDto.Email);
-
-            if (user == null || !BCrypt.Net.BCrypt.Verify(loginDto.Senha, user.Senha))
+            public async Task<IActionResult> Login([FromBody] LoginDTO loginDto)
             {
-                return Unauthorized(new { message = "Credenciais inválidas" });
+                var user = await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == loginDto.Email);
+
+                if (user == null || !BCrypt.Net.BCrypt.Verify(loginDto.Senha, user.Senha))
+                {
+                    return Unauthorized(new { message = "Credenciais inválidas" });
+                }
+
+                var token = GenerateJwtToken(user);
+
+                // Retorna o token e o tipo do usuário
+                return Ok(new { token, tipoUsuario = user.TipoUsuario });
             }
 
-            var token = GenerateJwtToken(user);
-
-            return Ok(new { token, tipoUsuario = user.TipoUsuario });
-        }
 
         private string GenerateJwtToken(Usuario user)
         {

@@ -8,19 +8,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// Configuração de CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin", policy =>
     {
-        policy.WithOrigins("http://localhost:3000")
+        policy.WithOrigins("http://localhost:3000") // Permitir o React
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
 });
-
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddControllers();
 
 var app = builder.Build();
 
@@ -45,16 +42,20 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseCors("AllowSpecificOrigin");
+app.UseCors("AllowSpecificOrigin"); // Ativando o CORS
+
 app.UseHttpsRedirection();
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();

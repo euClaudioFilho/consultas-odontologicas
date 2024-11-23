@@ -1,26 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../services/authService";
+import { jwtDecode } from "jwt-decode";
+import { UserContext } from "../context/UserContext"; // Importa o contexto
 
 const LoginView = () => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState("");
   const navigate = useNavigate();
+  const { setUserId } = useContext(UserContext); // Obtém o setter do ID do contexto
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await loginUser({ email, senha }); 
-      const { token, tipoUsuario } = response;
+      const { token, tipoUsuario } = await loginUser({ email, senha });
 
-      localStorage.setItem("token", token);
+      // Salva o tipo de usuário no localStorage
       localStorage.setItem("tipoUsuario", tipoUsuario);
 
+      // Decodifica o token para obter o ID do usuário
+      const decoded = jwtDecode(token);
+      const userId = decoded.sub;
+
+      // Salva o ID no contexto
+      setUserId(userId);
+
+      // Redireciona para a Home
       navigate("/home");
     } catch (error) {
-      setErro(error.message);
+      console.error("Erro ao fazer login:", error);
+      setErro(error.message || "Erro ao fazer login. Tente novamente.");
     }
   };
 
@@ -52,6 +63,7 @@ const LoginView = () => {
     </Container>
   );
 };
+
 
 const Container = styled.div`
   display: flex;

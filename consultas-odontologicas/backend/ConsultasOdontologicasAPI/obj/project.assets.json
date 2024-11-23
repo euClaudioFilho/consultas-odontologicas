@@ -3946,19 +3946,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Davi\\.nuget\\packages\\": {}
+    "C:\\Users\\Thiago\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Davi\\Downloads\\aula\\trab camillo\\consultas-odontologicas\\consultas-odontologicas\\backend\\ConsultasOdontologicasAPI\\ConsultasOdontologicasAPI.csproj",
+      "projectUniqueName": "F:\\Vianna\\PFS\\Trabalho\\consultas-odontologicas\\consultas-odontologicas\\backend\\ConsultasOdontologicasAPI\\ConsultasOdontologicasAPI.csproj",
       "projectName": "ConsultasOdontologicasAPI",
-      "projectPath": "C:\\Users\\Davi\\Downloads\\aula\\trab camillo\\consultas-odontologicas\\consultas-odontologicas\\backend\\ConsultasOdontologicasAPI\\ConsultasOdontologicasAPI.csproj",
-      "packagesPath": "C:\\Users\\Davi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Davi\\Downloads\\aula\\trab camillo\\consultas-odontologicas\\consultas-odontologicas\\backend\\ConsultasOdontologicasAPI\\obj\\",
+      "projectPath": "F:\\Vianna\\PFS\\Trabalho\\consultas-odontologicas\\consultas-odontologicas\\backend\\ConsultasOdontologicasAPI\\ConsultasOdontologicasAPI.csproj",
+      "packagesPath": "C:\\Users\\Thiago\\.nuget\\packages\\",
+      "outputPath": "F:\\Vianna\\PFS\\Trabalho\\consultas-odontologicas\\consultas-odontologicas\\backend\\ConsultasOdontologicasAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Davi\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Thiago\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -4043,7 +4043,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
