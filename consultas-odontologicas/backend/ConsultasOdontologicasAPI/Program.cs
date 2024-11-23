@@ -1,5 +1,7 @@
 using ConsultasOdontologicasAPI.Data;
 using Microsoft.EntityFrameworkCore;
+using ConsultasOdontologicasAPI.Models;
+using BCrypt.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,10 +20,30 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 builder.Services.AddControllers();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    context.Database.EnsureCreated(); 
+
+    if (!context.Usuarios.Any(u => u.TipoUsuario == "Administrador"))
+    {
+        var admin = new Usuario
+        {
+            Nome = "Administrador",
+            Email = "admin@admin.com",
+            Senha = BCrypt.Net.BCrypt.HashPassword("admin123"), 
+            TipoUsuario = "Administrador"
+        };
+
+        context.Usuarios.Add(admin);
+        context.SaveChanges();
+        Console.WriteLine("Usuário administrador criado: admin@admin.com / admin123");
+    }
+}
 
 if (app.Environment.IsDevelopment())
 {
@@ -30,7 +52,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("AllowSpecificOrigin");
-
 app.UseHttpsRedirection();
 app.UseAuthorization();
 

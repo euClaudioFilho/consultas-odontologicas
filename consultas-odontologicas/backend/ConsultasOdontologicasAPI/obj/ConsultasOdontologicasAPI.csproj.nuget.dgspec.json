@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Claudio Filho\\Documents\\Estudos\\Programação\\Faculdade\\4 PERÍODO\\P. Full Stack\\Trabalho 1 - Camillo\\trabalho-camillo\\consultas-odontologicas\\backend\\ConsultasOdontologicasAPI\\ConsultasOdontologicasAPI.csproj": {}
+    "C:\\Users\\Davi\\Downloads\\aula\\trab camillo\\consultas-odontologicas\\consultas-odontologicas\\backend\\ConsultasOdontologicasAPI\\ConsultasOdontologicasAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Claudio Filho\\Documents\\Estudos\\Programação\\Faculdade\\4 PERÍODO\\P. Full Stack\\Trabalho 1 - Camillo\\trabalho-camillo\\consultas-odontologicas\\backend\\ConsultasOdontologicasAPI\\ConsultasOdontologicasAPI.csproj": {
+    "C:\\Users\\Davi\\Downloads\\aula\\trab camillo\\consultas-odontologicas\\consultas-odontologicas\\backend\\ConsultasOdontologicasAPI\\ConsultasOdontologicasAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Claudio Filho\\Documents\\Estudos\\Programação\\Faculdade\\4 PERÍODO\\P. Full Stack\\Trabalho 1 - Camillo\\trabalho-camillo\\consultas-odontologicas\\backend\\ConsultasOdontologicasAPI\\ConsultasOdontologicasAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Davi\\Downloads\\aula\\trab camillo\\consultas-odontologicas\\consultas-odontologicas\\backend\\ConsultasOdontologicasAPI\\ConsultasOdontologicasAPI.csproj",
         "projectName": "ConsultasOdontologicasAPI",
-        "projectPath": "C:\\Users\\Claudio Filho\\Documents\\Estudos\\Programação\\Faculdade\\4 PERÍODO\\P. Full Stack\\Trabalho 1 - Camillo\\trabalho-camillo\\consultas-odontologicas\\backend\\ConsultasOdontologicasAPI\\ConsultasOdontologicasAPI.csproj",
-        "packagesPath": "C:\\Users\\Claudio Filho\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Claudio Filho\\Documents\\Estudos\\Programação\\Faculdade\\4 PERÍODO\\P. Full Stack\\Trabalho 1 - Camillo\\trabalho-camillo\\consultas-odontologicas\\backend\\ConsultasOdontologicasAPI\\obj\\",
+        "projectPath": "C:\\Users\\Davi\\Downloads\\aula\\trab camillo\\consultas-odontologicas\\consultas-odontologicas\\backend\\ConsultasOdontologicasAPI\\ConsultasOdontologicasAPI.csproj",
+        "packagesPath": "C:\\Users\\Davi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Davi\\Downloads\\aula\\trab camillo\\consultas-odontologicas\\consultas-odontologicas\\backend\\ConsultasOdontologicasAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Claudio Filho\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Davi\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"

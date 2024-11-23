@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-const HomeView = ({ usuario }) => {
+const HomeView = () => {
   const navigate = useNavigate();
+  const [tipoUsuario, setTipoUsuario] = useState("");
+
+  useEffect(() => {
+    
+    const tipo = localStorage.getItem("tipoUsuario");
+    if (tipo) {
+      setTipoUsuario(tipo); 
+    } else {
+      navigate("/login");
+    }
+  }, [navigate]);
 
   return (
     <Container>
       <Card>
-        <Title>Bem-vindo, {usuario.nome || "Usuário"}!</Title>
-        {usuario.tipo === "Paciente" ? (
+        <Title>Bem-vindo!</Title>
+        {tipoUsuario === "Paciente" ? (
           <>
             <Subtitle>Suas próximas consultas:</Subtitle>
             <List>
@@ -37,7 +48,7 @@ const HomeView = ({ usuario }) => {
               Agendar Nova Consulta
             </Button>
           </>
-        ) : (
+        ) : tipoUsuario === "Administrador" ? (
           <>
             <Subtitle>Painel Administrativo</Subtitle>
             <List>
@@ -57,16 +68,37 @@ const HomeView = ({ usuario }) => {
                 </Info>
               </AdminCard>
             </List>
-            <Button onClick={() => navigate("")}>
+            <Button onClick={() => navigate("/gerenciarConsultas")}>
               Gerenciar Consultas
             </Button>
-            <Button onClick={() => navigate("")}>
+            <Button onClick={() => navigate("/gerenciarPacientes")}>
               Gerenciar Pacientes
             </Button>
-            <Button onClick={() => navigate("")}>
+            <Button onClick={() => navigate("/gerenciarDentistas")}>
               Gerenciar Dentistas
             </Button>
           </>
+        ) : tipoUsuario === "Dentista" ? (
+          <>
+            <Subtitle>Agenda do Dentista</Subtitle>
+            <List>
+              <AdminCard>
+                <Info>
+                  <strong>Próxima Consulta:</strong> 2024-12-01 às 14:00
+                </Info>
+              </AdminCard>
+              <AdminCard>
+                <Info>
+                  <strong>Total de Consultas Hoje:</strong> 10
+                </Info>
+              </AdminCard>
+            </List>
+            <Button onClick={() => navigate("/minhasConsultas")}>
+              Ver Agenda Completa
+            </Button>
+          </>
+        ) : (
+          <Subtitle>Carregando...</Subtitle>
         )}
       </Card>
     </Container>
@@ -136,7 +168,7 @@ const Button = styled.button`
   color: white;
   font-size: 16px;
   padding: 10px;
-  margin:20px;
+  margin: 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;

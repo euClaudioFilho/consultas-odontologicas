@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import { loginUser } from "../services/authService"; 
+import { loginUser } from "../services/authService";
 
 const LoginView = () => {
   const [email, setEmail] = useState("");
@@ -12,8 +12,13 @@ const LoginView = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await loginUser({ email, senha });
-      navigate("/home"); 
+      const response = await loginUser({ email, senha }); 
+      const { token, tipoUsuario } = response;
+
+      localStorage.setItem("token", token);
+      localStorage.setItem("tipoUsuario", tipoUsuario);
+
+      navigate("/home");
     } catch (error) {
       setErro(error.message);
     }
@@ -133,5 +138,6 @@ const Error = styled.p`
   font-size: 14px;
   margin-bottom: 10px;
 `;
+
 
 export default LoginView;

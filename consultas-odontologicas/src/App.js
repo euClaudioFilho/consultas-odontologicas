@@ -9,12 +9,6 @@ import GerenciamentoPacientesView from "./views/GerenciamentoPacientesView";
 import GerenciamentoDentistasView from "./views/GerenciamentoDentsistasView";
 import GerenciamentoConsultasView from "./views/GerenciamentoConsultasView";
 
-const usuarioMock = {
-  nome: 'Claudio',
-  tipo: 'Paciente', // 'Administrador' 'Paciente'
-};
-
-
 
 function App() {
   return (
@@ -23,7 +17,7 @@ function App() {
         <Route path="/" element={<LoginView />} />
         <Route path="/register" element={<RegistroView />} />
         <Route path="/login" element={<LoginView />} />
-        <Route path="/home" element={<HomeView usuario={usuarioMock} />} />
+        <Route path="/home" element={<HomeView  />} />
         <Route path="/agendamento" element={<AgendamentoView />} />
         <Route path="/minhasConsultas" element={<MinhasConsultasView />} />
         <Route path="/gerenciarPacientes" element={<GerenciamentoPacientesView />}/>
