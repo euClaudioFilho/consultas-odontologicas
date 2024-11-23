@@ -11,9 +11,15 @@ const HomeView = () => {
     if (tipo) {
       setTipoUsuario(tipo);
     } else {
-      navigate("/login"); 
+      navigate("/login");
     }
   }, [navigate]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("tipoUsuario");
+    navigate("/login");
+  };
 
   return (
     <Container>
@@ -25,18 +31,21 @@ const HomeView = () => {
             <List>
               <ConsultaCard>
                 <Info>
-                  <strong>Data:</strong> 
+                  <strong>Data:</strong> 2024-12-01
                 </Info>
                 <Info>
-                  <strong>Horário:</strong> 
+                  <strong>Horário:</strong> 14:00
                 </Info>
                 <Info>
-                  <strong>Dentista:</strong> 
+                  <strong>Dentista:</strong> Dr. João
                 </Info>
               </ConsultaCard>
             </List>
-            <Button onClick={() => navigate("/agendarConsulta")}>
+            <Button onClick={() => navigate("/agendamento")}>
               Agendar Nova Consulta
+            </Button>
+            <Button onClick={() => navigate("/minhasConsultas")}>
+              Minhas Consultas
             </Button>
           </>
         ) : tipoUsuario === "Administrador" ? (
@@ -45,17 +54,17 @@ const HomeView = () => {
             <List>
               <AdminCard>
                 <Info>
-                  <strong>Consultas Agendadas:</strong> 
+                  <strong>Consultas Agendadas:</strong> 25
                 </Info>
               </AdminCard>
               <AdminCard>
                 <Info>
-                  <strong>Pacientes Cadastrados:</strong> 
+                  <strong>Pacientes Cadastrados:</strong> 120
                 </Info>
               </AdminCard>
               <AdminCard>
                 <Info>
-                  <strong>Dentistas Ativos:</strong> 
+                  <strong>Dentistas Ativos:</strong> 8
                 </Info>
               </AdminCard>
             </List>
@@ -75,12 +84,12 @@ const HomeView = () => {
             <List>
               <AdminCard>
                 <Info>
-                  <strong>Próxima Consulta:</strong> 
+                  <strong>Próxima Consulta:</strong> 2024-12-01 às 14:00
                 </Info>
               </AdminCard>
               <AdminCard>
                 <Info>
-                  <strong>Total de Consultas Hoje:</strong> 
+                  <strong>Total de Consultas Hoje:</strong> 10
                 </Info>
               </AdminCard>
             </List>
@@ -91,6 +100,7 @@ const HomeView = () => {
         ) : (
           <Subtitle>Carregando...</Subtitle>
         )}
+        <LogoutButton onClick={handleLogout}>Logout</LogoutButton>
       </Card>
     </Container>
   );
@@ -159,13 +169,21 @@ const Button = styled.button`
   color: white;
   font-size: 16px;
   padding: 10px;
-  margin: 20px;
+  margin: 10px 10px 10px 0; /* Adicionado margin-right */
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-family: "Poppins", sans-serif;
   &:hover {
     background-color: #003080;
+  }
+`;
+
+const LogoutButton = styled(Button)`
+  background-color: #e63946;
+  margin: 10px 0; /* Remove o margin-right para centralizar */
+  &:hover {
+    background-color: #b00020;
   }
 `;
 

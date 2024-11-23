@@ -10,24 +10,20 @@ const LoginView = () => {
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState("");
   const navigate = useNavigate();
-  const { setUserId } = useContext(UserContext); // Obtém o setter do ID do contexto
+  const { setUserId } = useContext(UserContext); 
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const { token, tipoUsuario } = await loginUser({ email, senha });
 
-      // Salva o tipo de usuário no localStorage
       localStorage.setItem("tipoUsuario", tipoUsuario);
 
-      // Decodifica o token para obter o ID do usuário
       const decoded = jwtDecode(token);
       const userId = decoded.sub;
 
-      // Salva o ID no contexto
       setUserId(userId);
 
-      // Redireciona para a Home
       navigate("/home");
     } catch (error) {
       console.error("Erro ao fazer login:", error);

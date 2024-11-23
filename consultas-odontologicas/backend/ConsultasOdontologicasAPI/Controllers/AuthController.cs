@@ -69,7 +69,6 @@ namespace ConsultasOdontologicasAPI.Controllers
 
                 var token = GenerateJwtToken(user);
 
-                // Retorna o token e o tipo do usuário
                 return Ok(new { token, tipoUsuario = user.TipoUsuario });
             }
 
