@@ -1,44 +1,19 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 const HomeView = () => {
-  const [tipoUsuario, setTipoUsuario] = useState(null);
   const navigate = useNavigate();
+  const [tipoUsuario, setTipoUsuario] = useState(null);
 
   useEffect(() => {
-    const fetchUserType = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const tipoUsuario = localStorage.getItem("tipoUsuario");
-
-        if (!token || !tipoUsuario) {
-          navigate("/login");
-          return;
-        }
-
-        // Define o tipo de usuário diretamente
-        setTipoUsuario(tipoUsuario);
-      } catch (error) {
-        console.error("Erro ao obter o tipo de usuário:", error);
-        navigate("/login");
-      }
-    };
-
-    fetchUserType();
+    const tipo = localStorage.getItem("tipoUsuario");
+    if (tipo) {
+      setTipoUsuario(tipo);
+    } else {
+      navigate("/login"); 
+    }
   }, [navigate]);
-
-  if (!tipoUsuario) {
-    return (
-      <Container>
-        <Card>
-          <Title>Bem-vindo!</Title>
-          <Subtitle>Carregando...</Subtitle>
-        </Card>
-      </Container>
-    );
-  }
 
   return (
     <Container>
@@ -47,18 +22,74 @@ const HomeView = () => {
         {tipoUsuario === "Paciente" ? (
           <>
             <Subtitle>Suas próximas consultas:</Subtitle>
-            {/* Conteúdo para Pacientes */}
+            <List>
+              <ConsultaCard>
+                <Info>
+                  <strong>Data:</strong> 
+                </Info>
+                <Info>
+                  <strong>Horário:</strong> 
+                </Info>
+                <Info>
+                  <strong>Dentista:</strong> 
+                </Info>
+              </ConsultaCard>
+            </List>
+            <Button onClick={() => navigate("/agendarConsulta")}>
+              Agendar Nova Consulta
+            </Button>
           </>
         ) : tipoUsuario === "Administrador" ? (
           <>
             <Subtitle>Painel Administrativo</Subtitle>
-            {/* Conteúdo para Administradores */}
+            <List>
+              <AdminCard>
+                <Info>
+                  <strong>Consultas Agendadas:</strong> 
+                </Info>
+              </AdminCard>
+              <AdminCard>
+                <Info>
+                  <strong>Pacientes Cadastrados:</strong> 
+                </Info>
+              </AdminCard>
+              <AdminCard>
+                <Info>
+                  <strong>Dentistas Ativos:</strong> 
+                </Info>
+              </AdminCard>
+            </List>
+            <Button onClick={() => navigate("/gerenciarConsultas")}>
+              Gerenciar Consultas
+            </Button>
+            <Button onClick={() => navigate("/gerenciarPacientes")}>
+              Gerenciar Pacientes
+            </Button>
+            <Button onClick={() => navigate("/gerenciarDentistas")}>
+              Gerenciar Dentistas
+            </Button>
           </>
-        ) : (
+        ) : tipoUsuario === "Dentista" ? (
           <>
             <Subtitle>Agenda do Dentista</Subtitle>
-            {/* Conteúdo para Dentistas */}
+            <List>
+              <AdminCard>
+                <Info>
+                  <strong>Próxima Consulta:</strong> 
+                </Info>
+              </AdminCard>
+              <AdminCard>
+                <Info>
+                  <strong>Total de Consultas Hoje:</strong> 
+                </Info>
+              </AdminCard>
+            </List>
+            <Button onClick={() => navigate("/minhasConsultas")}>
+              Ver Agenda Completa
+            </Button>
           </>
+        ) : (
+          <Subtitle>Carregando...</Subtitle>
         )}
       </Card>
     </Container>
