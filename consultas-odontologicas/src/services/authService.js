@@ -5,26 +5,23 @@ const BASE_URL = "http://localhost:5112";
 const authService = {
   login: async (email, senha) => {
     try {
-      console.log("Enviando para o login:", { email, senha }); 
+      const response = await axios.post(`${BASE_URL}/auth/login`, { email, senha });
 
-      const response = await axios.post(`${BASE_URL}/auth/login`, {
-        email, 
-        senha, 
-      });
+      const token = response.data.token;
+      const payload = JSON.parse(atob(token.split(".")[1])); 
 
-      // Armazena os dados do usuário no localStorage
       const usuario = {
-        token: response.data.token,
+        token,
         pacienteId: response.data.pacienteId || null,
         dentistaId: response.data.dentistaId || null,
-        tipo: response.data.tipo || "Desconhecido", 
-        nome: response.data.nome || "Usuário", 
+        tipo: payload.role || "Desconhecido",
+        nome: response.data.nome,
       };
 
-      localStorage.setItem("usuario", JSON.stringify(usuario)); 
-      return usuario; 
+      localStorage.setItem("usuario", JSON.stringify(usuario));
+      return usuario;
     } catch (error) {
-      console.error("Erro no login:", error.response?.data || error.message); 
+      console.error("Erro no login:", error.response?.data || error.message);
       throw error;
     }
   },
@@ -40,16 +37,16 @@ const authService = {
   },
 
   logout: () => {
-    localStorage.clear(); 
+    localStorage.clear();
   },
 
   getUsuario: () => {
     const usuario = localStorage.getItem("usuario");
-    return usuario ? JSON.parse(usuario) : null; 
+    return usuario ? JSON.parse(usuario) : null;
   },
 
   getToken: () => {
-    return localStorage.getItem("token"); 
+    return localStorage.getItem("token");
   },
 };
 

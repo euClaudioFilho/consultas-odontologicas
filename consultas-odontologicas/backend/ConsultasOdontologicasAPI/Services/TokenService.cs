@@ -18,7 +18,7 @@ namespace ConsultasOdontologicasAPI.Services
             var claims = new List<Claim>
         {
             new Claim(ClaimTypes.Name, userId.ToString()),
-            new Claim(ClaimTypes.Role, role)
+            new Claim(ClaimTypes.Role, role),
         };
 
             var tokenDescriptor = new SecurityTokenDescriptor

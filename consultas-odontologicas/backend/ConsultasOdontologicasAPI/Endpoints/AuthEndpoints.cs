@@ -63,14 +63,11 @@ namespace ConsultasOdontologicasAPI.Endpoints
                 return Results.Ok(new
                 {
                     token,
+                    nome = usuario.Nome,
                     pacienteId = usuario.Role == "Paciente" ? (int?)usuario.Id : null,
                     dentistaId = usuario.Role == "Dentista" ? (int?)usuario.Id : null
                 });
             });
-
-
-
-
         }
     }
 }

@@ -2,6 +2,7 @@ using System.Text.Json;
 using ConsultasOdontologicasAPI.Data;
 using ConsultasOdontologicasAPI.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ConsultasOdontologicasAPI.Endpoints
 {
@@ -17,16 +18,17 @@ namespace ConsultasOdontologicasAPI.Endpoints
                 if (string.IsNullOrWhiteSpace(consulta.Descricao))
                     return Results.BadRequest("A descrição da consulta é obrigatória.");
 
+                consulta.Status = "Pendente";
                 db.Consultas.Add(consulta);
                 await db.SaveChangesAsync();
                 return Results.Created($"/consultas/{consulta.Id}", consulta);
             });
 
-
             app.MapGet("/consultas/paciente/{pacienteId}", async (AppDbContext db, int pacienteId) =>
             {
                 var consultas = await db.Consultas
                     .Where(c => c.PacienteId == pacienteId)
+                    .OrderBy(c => c.DataHora)
                     .ToListAsync();
                 return Results.Ok(consultas);
             });
@@ -35,6 +37,7 @@ namespace ConsultasOdontologicasAPI.Endpoints
             {
                 var consultas = await db.Consultas
                     .Where(c => c.DentistaId == dentistaId)
+                    .OrderBy(c => c.DataHora)
                     .ToListAsync();
                 return Results.Ok(consultas);
             });
@@ -51,10 +54,28 @@ namespace ConsultasOdontologicasAPI.Endpoints
                 if (role == "Dentista" && consulta.DentistaId != usuarioId)
                     return Results.Forbid();
 
-                consulta.DataHora = consultaAtualizada.DataHora;
-                consulta.Descricao = consultaAtualizada.Descricao;
+                if (consultaAtualizada.DataHora != null)
+                    consulta.DataHora = consultaAtualizada.DataHora;
+
+                if (!string.IsNullOrWhiteSpace(consultaAtualizada.Descricao))
+                    consulta.Descricao = consultaAtualizada.Descricao;
 
                 await db.SaveChangesAsync();
+                return Results.Ok(consulta);
+            });
+
+            app.MapPut("/consultas/{id}/status", async (AppDbContext db, int id, [FromQuery] string novoStatus, [FromQuery] int dentistaId) =>
+            {
+                if (string.IsNullOrEmpty(novoStatus))
+                    return Results.BadRequest("O novo status é obrigatório.");
+
+                var consulta = await db.Consultas.FirstOrDefaultAsync(c => c.Id == id && c.DentistaId == dentistaId);
+                if (consulta == null)
+                    return Results.NotFound("Consulta não encontrada ou não pertence ao dentista.");
+
+                consulta.Status = novoStatus;
+                await db.SaveChangesAsync();
+
                 return Results.Ok(consulta);
             });
 
@@ -70,6 +91,12 @@ namespace ConsultasOdontologicasAPI.Endpoints
                 db.Consultas.Remove(consulta);
                 await db.SaveChangesAsync();
                 return Results.NoContent();
+            });
+
+            app.MapGet("/consultas/total", async (AppDbContext db) =>
+            {
+                var totalConsultas = await db.Consultas.CountAsync();
+                return Results.Ok(totalConsultas);
             });
         }
     }

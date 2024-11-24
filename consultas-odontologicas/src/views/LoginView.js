@@ -9,37 +9,28 @@ const LoginView = () => {
   const navigate = useNavigate();
 
   const handleLogin = async (event) => {
-    event.preventDefault();  
+    event.preventDefault();
     try {
       console.log("Tentando login com:", { email, senha });
-      const response = await authService.login(email, senha); 
+      const response = await authService.login(email, senha);
       console.log("Login bem-sucedido:", response);
-
-      let tipoUsuario;
-      if (response.pacienteId) {
-        tipoUsuario = "Paciente";
-      } else if (response.dentistaId) {
-        tipoUsuario = "Dentista";
+  
+      // Redireciona para a home correta
+      if (response.tipo === "Paciente") {
+        navigate("/homePaciente");
+      } else if (response.tipo === "Dentista") {
+        navigate("/homeDentista");
+      } else if (response.tipo === "Admin") {
+        navigate("/homeAdmin");
       } else {
-        tipoUsuario = "Admin";
+        alert("Tipo de usuário inválido.");
       }
-
-      const usuario = {
-        nome: response.nome || "Usuário",
-        tipo: tipoUsuario,
-        id: response.pacienteId || response.dentistaId || null,
-        token: response.token,
-      };
-
-      localStorage.setItem("usuario", JSON.stringify(usuario));
-
-      navigate("/home");
     } catch (error) {
       console.error("Erro ao realizar login:", error.message);
       alert("Erro ao realizar login. Verifique os dados e tente novamente.");
     }
   };
-
+  
   return (
     <Container>
       <LoginCard>

@@ -56,6 +56,7 @@ app.UseAuthorization();
 app.MapAuthEndpoints();
 app.MapConsultaEndpoints();
 app.MapDentistaEndpoints();
+app.MapPacienteEndpoints();
 
 using (var scope = app.Services.CreateScope())
 {

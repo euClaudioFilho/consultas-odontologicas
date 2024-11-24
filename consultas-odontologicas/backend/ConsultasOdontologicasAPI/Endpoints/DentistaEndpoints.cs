@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ConsultasOdontologicasAPI.Data;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ConsultasOdontologicasAPI.Models;
 using System.Security.Cryptography;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
+using ConsultasOdontologicasAPI.Data;
+using ConsultasOdontologicasAPI.Models;
 
 namespace ConsultasOdontologicasAPI.Endpoints
 {
@@ -31,12 +26,16 @@ namespace ConsultasOdontologicasAPI.Endpoints
                 db.Usuarios.Add(dentista);
                 await db.SaveChangesAsync();
 
-                return Results.Created($"/dentistas/{dentista.Id}", dentista);
+                return Results.Created($"/dentistas/{dentista.Id}", new { dentista.Id, dentista.Nome, dentista.Email });
             });
 
             app.MapGet("/dentistas", async (AppDbContext db) =>
             {
-                var dentistas = await db.Usuarios.Where(u => u.Role == "Dentista").ToListAsync();
+                var dentistas = await db.Usuarios
+                    .Where(u => u.Role == "Dentista")
+                    .Select(u => new { u.Id, u.Nome, u.Email })
+                    .ToListAsync();
+
                 return Results.Ok(dentistas);
             });
 
@@ -49,7 +48,7 @@ namespace ConsultasOdontologicasAPI.Endpoints
                     return Results.NotFound("Dentista não encontrado.");
                 }
 
-                return Results.Ok(dentista);
+                return Results.Ok(new { dentista.Id, dentista.Nome, dentista.Email });
             });
 
             app.MapPut("/dentistas/{id:int}", async (AppDbContext db, int id, Usuario dentistaAtualizado) =>
@@ -73,7 +72,7 @@ namespace ConsultasOdontologicasAPI.Endpoints
 
                 await db.SaveChangesAsync();
 
-                return Results.Ok(dentista);
+                return Results.Ok(new { dentista.Id, dentista.Nome, dentista.Email });
             });
 
             app.MapDelete("/dentistas/{id:int}", async (AppDbContext db, int id) =>
@@ -90,6 +89,13 @@ namespace ConsultasOdontologicasAPI.Endpoints
 
                 return Results.NoContent();
             });
+
+            app.MapGet("/dentistas/total", async (AppDbContext db) =>
+            {
+                var totalDentistas = await db.Usuarios.CountAsync(u => u.Role == "Dentista");
+                return Results.Ok(totalDentistas);
+            });
+
         }
     }
 }

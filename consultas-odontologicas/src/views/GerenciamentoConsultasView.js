@@ -1,33 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import consultaService from "../services/consultaService";
 
 const GerenciamentoConsultasView = () => {
-  const consultas = [
-    {
-      id: 1,
-      paciente: "João Silva",
-      dentista: "Dr. Carlos",
-      data: "2024-12-01",
-      horario: "14:00",
-      status: "Pendente",
-    },
-    {
-      id: 2,
-      paciente: "Maria Oliveira",
-      dentista: "Dra. Maria",
-      data: "2024-12-05",
-      horario: "10:00",
-      status: "Concluída",
-    },
-    {
-      id: 3,
-      paciente: "Carlos Souza",
-      dentista: "Dr. João",
-      data: "2024-12-10",
-      horario: "16:00",
-      status: "Cancelada",
-    },
-  ];
+  const [consultas, setConsultas] = useState([]);
+  const usuario = JSON.parse(localStorage.getItem("usuario"));
+  const dentistaId = usuario?.dentistaId;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchConsultas = async () => {
+      try {
+        if (!dentistaId) {
+          throw new Error("ID do dentista não encontrado.");
+        }
+        const response = await consultaService.getConsultasDentista(dentistaId);
+        setConsultas(response);
+      } catch (error) {
+        console.error("Erro ao carregar consultas do dentista:", error);
+        alert("Erro ao carregar consultas. Verifique os dados e tente novamente.");
+      }
+    };
+    fetchConsultas();
+  }, [dentistaId]);
+
+  const handleAlterarStatus = async (id, novoStatus) => {
+    try {
+      if (!dentistaId) {
+        throw new Error("ID do dentista não encontrado.");
+      }
+      await consultaService.atualizarStatusConsulta(id, novoStatus, dentistaId);
+      setConsultas(
+        consultas.map((consulta) =>
+          consulta.id === id ? { ...consulta, status: novoStatus } : consulta
+        )
+      );
+    } catch (error) {
+      console.error("Erro ao atualizar o status da consulta:", error);
+      alert("Erro ao atualizar o status da consulta.");
+    }
+  };
 
   return (
     <Container>
@@ -35,29 +48,42 @@ const GerenciamentoConsultasView = () => {
         <Title>Gerenciamento de Consultas</Title>
         <Subtitle>Lista de consultas agendadas:</Subtitle>
         <List>
-          {consultas.map((consulta) => (
-            <ConsultaCard key={consulta.id}>
-              <Details>
-                <Info>
-                  <strong>Paciente:</strong> {consulta.paciente}
-                </Info>
-                <Info>
-                  <strong>Dentista:</strong> {consulta.dentista}
-                </Info>
-                <Info>
-                  <strong>Data:</strong> {consulta.data} às {consulta.horario}
-                </Info>
-                <Status status={consulta.status}>
-                  <strong>Status:</strong> {consulta.status}
-                </Status>
-              </Details>
-              <ButtonGroup>
-                <ActionButton>Editar</ActionButton>
-                <ActionButton remover>Cancelar</ActionButton>
-              </ButtonGroup>
-            </ConsultaCard>
-          ))}
+          {consultas.length > 0 ? (
+            consultas.map((consulta) => (
+              <ConsultaCard key={consulta.id}>
+                <Details>
+                  <Info>
+                    <strong>Data:</strong>{" "}
+                    {new Date(consulta.dataHora).toLocaleDateString()} às{" "}
+                    {new Date(consulta.dataHora).toLocaleTimeString([], {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </Info>
+                  <Status status={consulta.status}>
+                    <strong>Status:</strong> {consulta.status}
+                  </Status>
+                </Details>
+                <ButtonGroup>
+                  <ActionButton
+                    onClick={() => handleAlterarStatus(consulta.id, "Concluída")}
+                  >
+                    Concluir
+                  </ActionButton>
+                  <ActionButton
+                    $remover={true}
+                    onClick={() => handleAlterarStatus(consulta.id, "Cancelada")}
+                  >
+                    Cancelar
+                  </ActionButton>
+                </ButtonGroup>
+              </ConsultaCard>
+            ))
+          ) : (
+            <EmptyMessage>Nenhuma consulta pendente.</EmptyMessage>
+          )}
         </List>
+        <BackButton onClick={() => navigate("/homeDentista")}>Voltar</BackButton>
       </Card>
     </Container>
   );
@@ -67,7 +93,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #f0f8ff;
 `;
 
@@ -118,7 +144,6 @@ const Details = styled.div`
 const Info = styled.p`
   font-size: 14px;
   color: #6b7c93;
-  margin-bottom: 5px;
   font-family: "Montserrat", sans-serif;
 `;
 
@@ -140,7 +165,7 @@ const ButtonGroup = styled.div`
 `;
 
 const ActionButton = styled.button`
-  background-color: ${(props) => (props.remover ? "#e63946" : "#004aad")};
+  background-color: ${(props) => (props.$remover ? "#e63946" : "#004aad")};
   color: white;
   font-size: 14px;
   padding: 8px 12px;
@@ -149,7 +174,30 @@ const ActionButton = styled.button`
   cursor: pointer;
   font-family: "Poppins", sans-serif;
   &:hover {
-    background-color: ${(props) => (props.remover ? "#b00020" : "#003080")};
+    background-color: ${(props) => (props.$remover ? "#b00020" : "#003080")};
+  }
+`;
+
+const EmptyMessage = styled.p`
+  font-size: 16px;
+  color: #6b7c93;
+  text-align: center;
+  margin-top: 20px;
+  font-family: "Montserrat", sans-serif;
+`;
+
+const BackButton = styled.button`
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  &:hover {
+    background-color: #5a6268;
   }
 `;
 

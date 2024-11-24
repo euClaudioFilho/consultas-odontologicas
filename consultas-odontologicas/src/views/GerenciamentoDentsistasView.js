@@ -249,6 +249,9 @@ const Info = styled.p`
 
 const ButtonGroup = styled.div`
   display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  align-content: center;
   gap: 10px;
 `;
 
@@ -289,8 +292,10 @@ const ModalContent = styled.div`
 `;
 
 const ModalTitle = styled.h2`
-  font-size: 24px;
+  font-size: 28px;
+  color: #004aad;
   margin-bottom: 20px;
+  font-family: "Roboto", sans-serif;
 `;
 
 const EmptyMessage = styled.p`

@@ -1,38 +1,55 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import consultaService from "../services/consultaService";
+import dentistaService from "../services/dentistaService";
 
 const AgendamentoView = () => {
   const [data, setData] = useState("");
   const [horario, setHorario] = useState("");
   const [dentistaId, setDentistaId] = useState("");
   const [motivoConsulta, setMotivoConsulta] = useState("");
+  const [dentistas, setDentistas] = useState([]); // Lista de dentistas
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchDentistas = async () => {
+      try {
+        const response = await dentistaService.getDentistas(); // Chamada ao serviço para buscar dentistas
+        setDentistas(response);
+      } catch (error) {
+        console.error("Erro ao carregar dentistas:", error);
+        alert("Erro ao carregar a lista de dentistas.");
+      }
+    };
+    fetchDentistas();
+  }, []);
 
   const handleAgendarConsulta = async () => {
     try {
-      const pacienteId = localStorage.getItem("pacienteId");
+      const usuario = JSON.parse(localStorage.getItem("usuario")); 
+      const pacienteId = usuario?.pacienteId;
+  
       if (!pacienteId) {
         alert("Erro: ID do paciente não encontrado. Faça login novamente.");
         return;
       }
   
       await consultaService.agendarConsulta({
-        pacienteId: parseInt(pacienteId, 10),
+        pacienteId, 
         dentistaId,
         dataHora: `${data}T${horario}`,
         descricao: motivoConsulta,
       });
   
       alert("Consulta agendada com sucesso!");
-      navigate("/home");
+      navigate("/homePaciente");
     } catch (error) {
       console.error("Erro ao agendar consulta:", error);
       alert("Erro ao agendar consulta. Verifique os dados e tente novamente.");
     }
   };
-  
+
   return (
     <Container>
       <Card>
@@ -60,8 +77,11 @@ const AgendamentoView = () => {
             onChange={(e) => setDentistaId(e.target.value)}
           >
             <option value="">Selecione um dentista</option>
-            <option value="1">Dr. João</option>
-            <option value="2">Dra. Maria</option>
+            {dentistas.map((dentista) => (
+              <option key={dentista.id} value={dentista.id}>
+                {dentista.nome}
+              </option>
+            ))}
           </Select>
           <Label>Motivo da consulta:</Label>
           <Textarea
