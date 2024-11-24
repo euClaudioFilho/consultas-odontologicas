@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "consultas-odontologicas", "consultas-odontologicas", "{7CF84C64-7270-4D0C-BDEC-8C4C6E83F32E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "backend", "backend", "{767F43BE-D3B0-4041-9729-8F5DDF70639E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsultasOdontologicasAPI", "consultas-odontologicas\backend\ConsultasOdontologicasAPI\ConsultasOdontologicasAPI.csproj", "{7FC1AE0D-2C1D-4240-9C38-386D55FBB392}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7FC1AE0D-2C1D-4240-9C38-386D55FBB392}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FC1AE0D-2C1D-4240-9C38-386D55FBB392}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FC1AE0D-2C1D-4240-9C38-386D55FBB392}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FC1AE0D-2C1D-4240-9C38-386D55FBB392}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{767F43BE-D3B0-4041-9729-8F5DDF70639E} = {7CF84C64-7270-4D0C-BDEC-8C4C6E83F32E}
+		{7FC1AE0D-2C1D-4240-9C38-386D55FBB392} = {767F43BE-D3B0-4041-9729-8F5DDF70639E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9F57C68D-1090-484B-BFEC-36C6A3D4F8FC}
+	EndGlobalSection
+EndGlobal
